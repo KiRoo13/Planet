@@ -1,0 +1,30 @@
+.form {
+   @include flex;
+   border-bottom: 1px solid $white;
+   padding-bottom: 10px;
+   justify-content: space-between;
+}
+
+.form-left {
+   flex: 0 0 75%;
+   @include flex;
+   justify-content: space-between;
+   & div {
+      // flex: 0 0 29%;
+      & > label {
+         width: 100%;
+         @include flex;
+         justify-content: space-between;
+      }
+   }
+}
+
+
+@media (max-width: 1000px) {
+   .form {
+      flex-direction: column;
+   }
+   .form-left {
+      flex-direction: column;
+   }
+}

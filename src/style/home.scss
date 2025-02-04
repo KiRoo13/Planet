@@ -1,0 +1,42 @@
+.main {
+   width: 100vw;
+   max-height: 100vh;
+   overflow: scroll;
+   margin-top: 90px;
+   flex: 1 0 100%;
+   background-image: url('../img/gelaxy.jpg');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   position: relative;
+   &__mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $mask;
+   }
+}
+.main::-webkit-scrollbar {
+   display: none;
+ }
+ 
+.main-info {
+   max-width: 30%;
+   max-height: 300px;
+   padding-top: 50px;
+   padding-left: 20px;
+   display: flex;
+   flex-direction: column;
+   &__head {
+      @include flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+   }
+}
+
+.z {
+   position: relative;
+   z-index: 2;
+}
