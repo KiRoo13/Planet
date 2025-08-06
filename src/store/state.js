@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import roversSlice from './slice/roversSlice';
 import homePageSlice from "./slice/homePageSlice";
+import planetSlice from './slice/planetSlice'
 
 export const state = configureStore({
    reducer: {
-      rovers: roversSlice,
+      planet: planetSlice,
       loadHomePage: homePageSlice
    }
 })

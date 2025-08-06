@@ -1,49 +1,36 @@
-import { Outlet } from "react-router";
-import { useLocation } from "react-router";
-import LoaderHomePage from "../LoaderHomePage";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getPhotoDays } from "../../store/slice/homePageSlice";
+// https://api.nasa.gov/planetary/apod?api_key=2zvYZtezOhSeLkCr7av3Nrv0i6M5k5hSiBLX9vOO
 
+import { Outlet, useLocation} from "react-router";
 
 
 function Home() {
-  const location = useLocation();
 
-  const firstLoad = useSelector((state) => state.loadHomePage.data);
-  const isLoading = useSelector((state) => state.loadHomePage.isLoading);
-  const error = useSelector((state) => state.loadHomePage.error);
+  const { pathname } = useLocation()
+  
 
-  const dispatch = useDispatch();
+  // const data = useSelector((state) => state.loadHomePage.data);
+  // const isLoading = useSelector((state) => state.loadHomePage.isLoading);
+  // const error = useSelector((state) => state.loadHomePage.error);
 
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (Object.keys(firstLoad).length === 0) {
-       dispatch(getPhotoDays('https://api.nasa.gov/planetary/apod?api_key=2zvYZtezOhSeLkCr7av3Nrv0i6M5k5hSiBLX9vOO'))
-    }
-  }, []);
+  // console.log(data, dispatch);
+
+  // useEffect(() => {
+  //   console.log("effectHome");
+  //   dispatch(
+  //     getPhotoDays(
+  //       "https://images-api.nasa.gov/search?q=Jupiter&media_type=image"
+  //     )
+  //   );
+  // }, []);
 
   return (
-    <div className="main" style={{ backgroundImage: `url(${firstLoad.url})`}}>
+    <div className="main">
       <div className="main__mask"></div>
       <div className="z">
-        {location.pathname === "/" ? (
-          !isLoading ? (
-            <div className="main-info">
-              <div className="main-info__head">
-                <h3>{firstLoad.title}</h3>
-                <strong>{firstLoad.date}</strong>
-              </div>
-              <div className="main-info__body">
-                <p>{firstLoad.explanation}</p>
-              </div>
-            </div>
-          ) : (
-            <LoaderHomePage />
-          )
-        ) : (
-          <Outlet />
-        )}
+        {pathname === '/' && <div className="main__text">Приветствую! На данном веб-ресурсе вы ознакомитесь с обширным массивом уникальных данных о нашей планете и космическом пространстве. Я искренне надеюсь, что это познавательное путешествие вызовет у вас неподдельный интерес и восхищение. Пожалуйста, переходите на соответствующие страницы и углубляйтесь в изучение этого удивительного мира!</div>}
+        <Outlet />
       </div>
     </div>
   );

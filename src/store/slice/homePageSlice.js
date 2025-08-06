@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import axios from "axios";
 
 
 const initialState = {
-   data: [],
+   data: {},
    isLoading: false,
    error: null
 }
@@ -11,12 +12,15 @@ const getPhotoDays = createAsyncThunk(
    '@loadHomePage/getPhotoDays', 
    async (url) => {
       try {
-         const response = await fetch(url)
-         if (!response.ok) {
+         
+         const response = await axios.get(url)
+         console.log(response)
+         if (response.status !== 200) {
             throw new Error('Что то пошло не так!')
          }
-         const data = await response.json()
-         return data
+         
+         
+         return response.data
       } catch (e) {
          isRejectedWithValue(e.massage)
       }
@@ -29,7 +33,7 @@ const homePageSlice = createSlice({
    extraReducers: (bulder) => {
         bulder.addCase(getPhotoDays.pending, (state)=>{
          state.isLoading = true
-         state.data = []
+         state.data = {}
          state.error = null
         })
         .addCase(getPhotoDays.fulfilled, (state, actions) => {
@@ -39,7 +43,7 @@ const homePageSlice = createSlice({
         })
         .addCase(getPhotoDays.rejected, (state, actions)=> {
          state.isLoading = false
-         state.data = []
+         state.data = {}
          state.error = actions.payload
         })
    }

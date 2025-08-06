@@ -15,7 +15,6 @@ function Rovers() {
   return (
     <section className="section-rovers">
       <div className="conteiner">
-        <Form />
         <div className="rovers-card">
          {isLoading && <LoaderCard/>}
            {!roversData.length 

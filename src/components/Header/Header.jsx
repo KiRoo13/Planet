@@ -15,7 +15,7 @@ function Header() {
           <nav className="header-menu">
             <ul className="header-menu__list">
               <li><NavLink to='/rovers'>Rovers</NavLink></li>
-              <li><NavLink to='/planetinfo'>Planet info</NavLink></li>
+              <li><NavLink to='/planetinfo'>Информация о планетах</NavLink></li>
             </ul>
           </nav>
           <div className="header-link">

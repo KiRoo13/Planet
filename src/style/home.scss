@@ -17,6 +17,13 @@
     right: 0;
     background-color: $mask;
    }
+   &__text {
+      max-width: 600px;
+      font-size: 20px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 30px 0;
+   }
 }
 .main::-webkit-scrollbar {
    display: none;
