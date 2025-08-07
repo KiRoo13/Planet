@@ -26,8 +26,9 @@ const ExpandMore = styled((props) => {
 }));
 
 function CardRover({ item }) {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   // const video = useSelector((state)=> state.planet)
+  const [expanded, setExpanded] = useState(false);
   const info = item.data[0];
   const img = item.links[0];
 
@@ -47,14 +48,17 @@ function CardRover({ item }) {
 
   // console.log(info);
   // console.log(img);
-  // console.log(item)
+  // console.log(item.href)
   // console.log(video.video[0])
 
-  const [expanded, setExpanded] = useState(false);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const vieVideo = (href) => {
+    dispatch(getPlanetVideo(href))
+  }
 
   return (
     <Card sx={{ maxWidth: 345, marginBottom: 10 }}>
@@ -74,7 +78,7 @@ function CardRover({ item }) {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      <CardActions>{type === "video" && <BasicButton text={'Cмотреть'}/>}</CardActions>
+      <CardActions>{type === "video" && <BasicButton text={'Cмотреть'} handleClick={() => vieVideo(item.href)}/>}</CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{info.description}</Typography>

@@ -1,13 +1,14 @@
 import {
   createAsyncThunk,
   createSlice,
+  isAnyOf,
   isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
   data: {},
-  video: [],
+  transitionLink: "",
   isLoading: false,
   error: null,
 };
@@ -21,7 +22,7 @@ const getInformationPlanet = createAsyncThunk(
         throw new Error("Что то пошло не так!");
       }
       console.log(response.data);
-      console.log(response)
+      console.log(response);
       return response.data;
     } catch (e) {
       isRejectedWithValue(e.massage);
@@ -37,8 +38,7 @@ const getPlanetVideo = createAsyncThunk(
       if (response.status !== 200) {
         throw new Error("Что то пошло не так!");
       }
-      console.log(response.data);
-      return response.data;
+      window.open(response.data[0], '_blank');
     } catch (e) {
       isRejectedWithValue(e.massage);
     }
@@ -53,21 +53,28 @@ const planetSlice = createSlice({
   },
   extraReducers: (bulder) => {
     bulder
-      .addCase(getInformationPlanet.pending, (state) => {
-        state.isLoading = true;
-        state.data = {};
-        state.error = null;
-      })
       .addCase(getInformationPlanet.fulfilled, (state, actions) => {
         state.isLoading = false;
         state.data = actions.payload.collection;
-        state.error = null;
       })
-      .addCase(getInformationPlanet.rejected, (state, actions) => {
+      .addCase(getPlanetVideo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = {};
-        state.error = actions.payload;
+        state.transitionLink = action.payload;
       })
+      .addMatcher(
+        isAnyOf(getInformationPlanet.pending),
+        (state) => {
+          state.isLoading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(getInformationPlanet.rejected, getPlanetVideo.rejected),
+        (state, action) => {
+          state.isLoading = false;
+          state.error = action.payload;
+        }
+      );
   },
 });
 
