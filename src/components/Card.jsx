@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch, useSelector } from "react-redux";
-import { getPlanetVideo } from "../store/slice/planetSlice";
+import { getPlanetVideoOrAudio } from "../store/slice/planetSlice";
 import BasicButton from "./UI/BasicButton";
 
 const ExpandMore = styled((props) => {
@@ -26,13 +26,14 @@ const ExpandMore = styled((props) => {
 }));
 
 function CardRover({ item }) {
-  const dispatch = useDispatch()
-  // const video = useSelector((state)=> state.planet)
   const [expanded, setExpanded] = useState(false);
+
+  const dispatch = useDispatch();
+
   const info = item.data[0];
-  const img = item.links[0];
 
   const type = useMemo(() => {
+
     switch (info.media_type) {
       case "image":
         return "image";
@@ -44,21 +45,21 @@ function CardRover({ item }) {
         return "image";
     }
   }, [info]);
+
+  let img = null 
+  if (type !== 'audio') {
+    img = item.links[0];
+  }
+
+
   console.log(type);
-
-  // console.log(info);
-  // console.log(img);
-  // console.log(item.href)
-  // console.log(video.video[0])
-
-
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const vieVideo = (href) => {
-    dispatch(getPlanetVideo(href))
-  }
+  const vieVideo = (href, type) => {
+    dispatch(getPlanetVideoOrAudio({href, type}));
+  };
 
   return (
     <Card sx={{ maxWidth: 345, marginBottom: 10 }}>
@@ -66,7 +67,7 @@ function CardRover({ item }) {
         title={info.title}
         subheader={new Date(info.date_created).toDateString()}
       />
-      <CardMedia component="img" height="194" image={img.href} alt={img.rel} />
+     {type !== 'audio' &&  <CardMedia component="img" height="194" image={img.href} alt={img.rel} />}
       <CardActions disableSpacing>
         Справка:
         <ExpandMore
@@ -78,7 +79,20 @@ function CardRover({ item }) {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      <CardActions>{type === "video" && <BasicButton text={'Cмотреть'} handleClick={() => vieVideo(item.href)}/>}</CardActions>
+      <CardActions>
+        {type === "video" && (
+          <BasicButton
+            text={"Cмотреть"}
+            handleClick={() => vieVideo(item.href, type)}
+          />
+        )}
+         {type === "audio" && (
+          <BasicButton
+            text={"Cлушать"}
+            handleClick={() => vieVideo(item.href, type)}
+          />
+        )}
+      </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{info.description}</Typography>

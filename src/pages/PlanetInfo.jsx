@@ -3,11 +3,17 @@ import LoaderCard from "../components/LoaderCard";
 import Form from "../components/Form";
 import CardRover from "../components/Card";
 
+
+
+
+
+
 function PlanetInfo() {
-  const { data } = useSelector((state) => state.planet);
+  const { data } = useSelector((state)=> state.planet)
   const { isLoading } = useSelector((state) => state.planet);
   const { error } = useSelector((state) => state.planet);
-  console.log(data);
+
+  console.log(data, 'RTK')
 
   return (
     <>
