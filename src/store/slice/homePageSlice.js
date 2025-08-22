@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
@@ -18,11 +18,9 @@ const getPhotoDays = createAsyncThunk(
          if (response.status !== 200) {
             throw new Error('Что то пошло не так!')
          }
-         
-         
          return response.data
       } catch (e) {
-         isRejectedWithValue(e.massage)
+      console.error(e);
       }
    }
    )

@@ -2,12 +2,15 @@ import {
   createAsyncThunk,
   createSlice,
   isAnyOf,
-  isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import { findMp4LinkOrMp3 } from "../../utils/findMp4LinkOrMp3";
 import { initLocalStorage, changelocalStorage } from "../../utils/MyLocalStorage";
 
+
+const api = axios.create({
+  validateStatus: (status) => status >= 200 && status < 300
+});
 
 
 const initialState = {
@@ -21,41 +24,55 @@ const initialState = {
 
 const getInformationPlanet = createAsyncThunk(
   "@planet/getInformationPlanet",
-  async (url) => {
+  async (url, { rejectWithValue }) => {
     try {
-      const response = await axios.get(url);
-      if (response.status !== 200) {
-        throw new Error("Что то пошло не так!");
-      }
+      const response = await api.get(url);
       return response.data;
     } catch (e) {
-      isRejectedWithValue(e.massage);
+      let errorMassage = null
+      if(e) {
+         switch (e.code) {
+          case "ERR_NETWORK":
+            errorMassage = 'Сервер ответил с ошибкой!';
+            break;
+          case 401:
+          default:
+            errorMassage = `Ошибка сервера`;
+        }
+      }
+      return rejectWithValue(errorMassage)
     }
   }
 );
 
 const getPlanetVideoOrAudio = createAsyncThunk(
   "@planet/getPlanetVideo ",
-  async (reqData) => {
+  async (reqData, {rejectWithValue}) => {
     const { href, type } = reqData
     try {
       const response = await axios.get(href);
-      if (response.status !== 200) {
-        throw new Error("Что то пошло не так!");
-      }
       window.open(findMp4LinkOrMp3(response.data, type), '_blank');
     } catch (e) {
-      isRejectedWithValue(e.massage);
+      let errorMassage = null
+      if(e) {
+         switch (e.code) {
+          case "ERR_NETWORK":
+            errorMassage = 'Сервер ответил с ошибкой!';
+            break;
+          case 401:
+          default:
+            errorMassage = `Ошибка сервера`;
+        }
+      }
+      return rejectWithValue(errorMassage)
     }
   }
 );
 
 const planetSlice = createSlice({
-  name: "rovers",
+  name: "planet",
   initialState,
-  reducers: {
-    add: () => null,
-  },
+  reducers: {},
   extraReducers: (bulder) => {
     bulder
       .addCase(getInformationPlanet.fulfilled, (state, actions) => {
@@ -84,7 +101,7 @@ const planetSlice = createSlice({
   },
 });
 
-export const { add } = planetSlice.actions;
+
 
 export default planetSlice.reducer;
 

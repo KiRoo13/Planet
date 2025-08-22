@@ -1,19 +1,24 @@
 import { useSelector } from "react-redux";
+import { Alert, Collapse } from "@mui/material";
 import LoaderCard from "../components/LoaderCard";
 import Form from "../components/Form";
 import CardRover from "../components/Card";
-
-
-
-
-
+import { useEffect, useState } from "react";
+import BasicButton from "../components/UI/BasicButton";
 
 function PlanetInfo() {
-  const { data } = useSelector((state)=> state.planet)
+  const [ open, setOpen ] = useState(true);
+  const { data } = useSelector((state) => state.planet);
   const { isLoading } = useSelector((state) => state.planet);
   const { error } = useSelector((state) => state.planet);
 
-  console.log(data, 'RTK')
+  console.log(error, data.items, data,open);
+
+  useEffect(()=>{
+    if(isLoading) {
+      setOpen(!open)
+    }
+  }, [isLoading])
 
   return (
     <>
@@ -27,8 +32,30 @@ function PlanetInfo() {
           небесных тел.
         </div>
       )}
+      {error && (
+        <Collapse in={open}>
+          <Alert
+            variant="outlined"
+            severity="error"
+            action={<BasicButton text={'Закрыть'} handleClick={() => setOpen(false)} />}
+          >
+            {error}
+          </Alert>
+        </Collapse>
+      )}
+      {data.items.length === 0 && (
+        <Collapse in={open}>
+          <Alert
+            variant="outlined"
+            severity="info"
+            action={<BasicButton text={'Закрыть'} handleClick={() => setOpen(false)} />}
+          >
+            По запросу данные не найдены
+          </Alert>
+        </Collapse>
+      )}
       <div className="planet-card">
-        {isLoading && <LoaderCard/>}
+        {isLoading && <LoaderCard />}
         {Object.keys(data).length !== 0 &&
           data.items.map((item) => (
             <CardRover key={item.data[0].nasa_id} item={item} />
