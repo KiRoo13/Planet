@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import homePageSlice from "./slice/homePageSlice";
+import scientificArticles from "./slice/scientificArticlesSlice";
 import planetSlice from './slice/planetSlice'
 
 export const state = configureStore({
    reducer: {
       planet: planetSlice,
-      loadHomePage: homePageSlice
+      articles: scientificArticles
    }
 })

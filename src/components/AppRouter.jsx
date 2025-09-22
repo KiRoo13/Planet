@@ -1,14 +1,17 @@
 import { Route, Routes } from "react-router";
 import Home from "./Home/Home";
-import Rovers from "../pages/Rovers";
 import PlanetInfo from "../pages/PlanetInfo";
+import NotFound from "../pages/NotFound";
+import SolarSystem from "../pages/SolarSystem";
+
 
 function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Home />}>
-        <Route path="/rovers" element={<Rovers />} />
+        <Route path="/solarSystem" element={<SolarSystem/>} />
         <Route path="/planetinfo" element={<PlanetInfo />} />
+        <Route path="*" element={<NotFound/>}></Route>
       </Route>
     </Routes>
   );

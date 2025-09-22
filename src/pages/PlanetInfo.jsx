@@ -8,11 +8,8 @@ import BasicButton from "../components/UI/BasicButton";
 
 function PlanetInfo() {
   const [ open, setOpen ] = useState(true);
-  const { data } = useSelector((state) => state.planet);
-  const { isLoading } = useSelector((state) => state.planet);
-  const { error } = useSelector((state) => state.planet);
+  const { data, isLoading, error } = useSelector((state) => state.planet);
 
-  console.log(error, data.items, data,open);
 
   useEffect(()=>{
     if(isLoading) {

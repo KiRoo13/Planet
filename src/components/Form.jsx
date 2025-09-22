@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PLANET_NAME, TYPE_DATA } from "../utils/Constans/selectRovers";
+import { PLANET_NAME, TYPE_DATA } from "../utils/Constans/namePlanet";
 import { useDispatch } from "react-redux";
 import { getInformationPlanet } from "../store/slice/planetSlice";
 import BasicSelect from "./UI/BasicSelect";

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -9,7 +9,7 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getPlanetVideoOrAudio } from "../store/slice/planetSlice";
 import BasicButton from "./UI/BasicButton";
 
@@ -47,12 +47,12 @@ function CardRover({ item }) {
   }, [info]);
 
   let img = null 
+
   if (type !== 'audio') {
     img = item.links[0];
   }
 
 
-  console.log(type);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

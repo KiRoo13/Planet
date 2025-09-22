@@ -1,0 +1,33 @@
+.solar-content {
+	@include flex;
+	flex-direction: column;
+}
+.solar-content-head{
+	@include flex;
+	flex-direction: column;
+	h3 {
+		text-align: center;
+		padding: 20px 0px;
+	}
+
+   &__img {
+		width: 50%;
+	}
+}
+
+.solar-content-body {
+	row-gap: 10px;
+	width: 100%;
+	padding: 30px 0px;
+	@include flex;
+	flex-direction: column;
+}
+.solar-content-body-row {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.solar-content-body-col {
+	width: 40%;
+}
