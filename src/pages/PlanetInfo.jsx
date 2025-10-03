@@ -5,6 +5,7 @@ import Form from "../components/Form";
 import CardRover from "../components/Card";
 import { useEffect, useState } from "react";
 import BasicButton from "../components/UI/BasicButton";
+import ButtonUp from "../components/ButtunUp";
 
 function PlanetInfo() {
   const [ open, setOpen ] = useState(true);
@@ -58,6 +59,7 @@ function PlanetInfo() {
             <CardRover key={item.data[0].nasa_id} item={item} />
           ))}
       </div>
+      <ButtonUp/>
     </>
   );
 }

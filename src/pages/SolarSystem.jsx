@@ -18,11 +18,13 @@ function SolarSystem() {
         <div className="solar-content">
           <div className="solar-content-head">
             <h3>{selectedPlanet.name}</h3>
-            <img
+           <div className="solar-content-head-img">
+             <img
               className="solar-content-head__img"
               src={selectedPlanet.img}
               alt={selectedPlanet.name}
             />
+           </div>
           </div>
           <div className="solar-content-body">
             <div className="solar-content-body-row">

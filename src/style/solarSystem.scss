@@ -9,10 +9,16 @@
 		text-align: center;
 		padding: 20px 0px;
 	}
-
-   &__img {
-		width: 50%;
-	}
+}
+.solar-content-head-img {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  & img {
+     width: 35vw;   
+     height: 30vw;
+     object-fit: cover;
+  }
 }
 
 .solar-content-body {
@@ -31,3 +37,12 @@
 .solar-content-body-col {
 	width: 40%;
 }
+
+
+
+@media (max-width: 1024px) {
+ .solar-content-body-row {
+	justify-content: center;
+ }
+}
+

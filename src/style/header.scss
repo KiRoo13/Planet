@@ -34,3 +34,8 @@
    color: $active;
 }
 
+@media (max-width: 600px) {
+   .header {
+      column-gap: 30px;
+   }
+}

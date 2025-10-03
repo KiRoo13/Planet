@@ -6,8 +6,6 @@ function Home() {
 
   return (
     <div className="main">
-      <div className="main__mask"></div>
-      <div className="z">
         {pathname === "/" && (
           <div className="main__text">
             Приветствую! На данном веб-ресурсе вы ознакомитесь с обширным
@@ -19,7 +17,6 @@ function Home() {
           </div>
         )}
         <Outlet />
-      </div>
     </div>
   );
 }
