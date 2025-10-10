@@ -10,6 +10,7 @@ import ButtonUp from "../components/ButtunUp";
 function PlanetInfo() {
   const [ open, setOpen ] = useState(true);
   const { data, isLoading, error } = useSelector((state) => state.planet);
+  console.log(data, error)
 
 
   useEffect(()=>{
@@ -41,7 +42,7 @@ function PlanetInfo() {
           </Alert>
         </Collapse>
       )}
-      {data.items.length === 0 && (
+      {data.items?.length === 0 && (
         <Collapse in={open}>
           <Alert
             variant="outlined"
