@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter as BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { state } from "./store/state";
@@ -12,7 +12,9 @@ const darkTheme = createTheme({
 });
 
 let point = document.getElementById("root")
+
 const root = ReactDOM.createRoot(point);
+
 root.render(
   <ThemeProvider theme={darkTheme}>
     <BrowserRouter>
