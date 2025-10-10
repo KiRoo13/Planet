@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Planet/static/css/main.44e8290f.css",
-    "main.js": "/Planet/static/js/main.bf857767.js",
+    "main.js": "/Planet/static/js/main.464bad3f.js",
     "static/media/gelaxy.jpg": "/Planet/static/media/gelaxy.f50f4b4f1e0054598af7.jpg",
     "index.html": "/Planet/index.html",
     "main.44e8290f.css.map": "/Planet/static/css/main.44e8290f.css.map",
-    "main.bf857767.js.map": "/Planet/static/js/main.bf857767.js.map"
+    "main.464bad3f.js.map": "/Planet/static/js/main.464bad3f.js.map"
   },
   "entrypoints": [
     "static/css/main.44e8290f.css",
-    "static/js/main.bf857767.js"
+    "static/js/main.464bad3f.js"
   ]
 }
