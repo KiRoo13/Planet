@@ -1,0 +1,6 @@
+.not-faund {
+   padding-top: 50px;
+   @include flex;
+   flex-direction: column;
+   row-gap: 15px;
+}

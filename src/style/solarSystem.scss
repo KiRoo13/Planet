@@ -1,0 +1,48 @@
+.solar-content {
+	@include flex;
+	flex-direction: column;
+}
+.solar-content-head{
+	@include flex;
+	flex-direction: column;
+	h3 {
+		text-align: center;
+		padding: 20px 0px;
+	}
+}
+.solar-content-head-img {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  & img {
+     width: 35vw;   
+     height: 30vw;
+     object-fit: cover;
+  }
+}
+
+.solar-content-body {
+	row-gap: 10px;
+	width: 100%;
+	padding: 30px 0px;
+	@include flex;
+	flex-direction: column;
+}
+.solar-content-body-row {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.solar-content-body-col {
+	width: 40%;
+}
+
+
+
+@media (max-width: 1024px) {
+ .solar-content-body-row {
+	justify-content: center;
+ }
+}
+

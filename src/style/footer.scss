@@ -1,0 +1,7 @@
+.section-footer {
+   flex: 0 0;
+}
+.footer-content {
+   height: 45px;
+   @include flex;
+}
